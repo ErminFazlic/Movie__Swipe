@@ -31,16 +31,16 @@ const loginUser = async (req:Request, res: Response):Promise<any> => {
 
         const body = req.body as Pick<IUser, 'email' | 'password'>
 
-        
+        const user : any = await User.findOne({email: body.email})
 
-        const allUsers: IUser[] = await User.find()
-
-        allUsers.forEach(element => {
-            if(element.email=== body.email && element.password === body.password){
-                res.status(200).send(element.username)
+        if (user == null){
+            res.status(401).json({message:'Wrong email or password'})
+        }else{
+            if(user.password != body.password){
+                res.status(401).json({message:'Wrong email or password'}) 
             }
-        });
-        res.status(401).json({message:'Wrong email or password'})
+            res.status(200).send(user.username)
+        }
 
     }catch(e: any){
         res.status(500).send(e.message);
@@ -56,18 +56,18 @@ const addFriend = async (req:Request, res:Response):Promise<any> => {
 
         const body = req.body as Pick<IUser, 'email'>
 
-        const allUsers: IUser[] = await User.find()
-        let user: any= null
-        let userToAdd: any = null
-        allUsers.forEach(element => {
-            if(element.email === body.email){
-                user = element
-            }
-            if(element.username === usernameToAdd){
-                userToAdd = element
-            }
-        });
+        const user : any = await User.findOne({email:body.email})
+        const userToAdd : any = await User.findOne({username:usernameToAdd})
 
+        if(user === null || userToAdd == null){
+            res.status(200).json({message: 'Could not find user'})
+            return
+        }
+
+        if(user.friends.includes(userToAdd._id)){
+            res.status(200).json({message: 'You have already added that user as a friend'})
+            return
+        }
         user.friends.push(userToAdd._id)
         userToAdd.friends.push(user._id)
         
@@ -75,6 +75,7 @@ const addFriend = async (req:Request, res:Response):Promise<any> => {
         const updateUserToAdd: IUser | null = await User.findByIdAndUpdate(userToAdd._id, userToAdd)
 
         res.status(200).json({message:'Added friend'})
+        return
     }catch(e: any){
         res.status(500).send(e.message);
     }

@@ -15,8 +15,14 @@ function Home() {
         event.preventDefault();
         const response = addFriend(email, friendsUsername)
         response.then(res => {
-            if (res.status === "500") {
+            if ( res.message === 'Could not find user') {
                 alert("We couldn't find a user with that username")
+            }
+            else if(res.message === 'You have already added that user as a friend'){
+                alert(res.message)
+            }
+            else if(res.status === "500"){
+                alert("Something went wrong please try again")
             }
             else {
                 alert("Added friend")
