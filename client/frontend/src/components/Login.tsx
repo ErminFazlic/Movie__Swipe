@@ -3,6 +3,8 @@ import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import { loginUser } from "./../api"
 import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-bootstrap";
+import './Login.css'
 
 
 
@@ -31,32 +33,33 @@ export const Login = () => {
   }
 
   return (
-    <div className="col-lg-3 col">
+    <div className="col-12 box">
       <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="email">
+          <Form.Control
+            placeholder="Email"
+            autoFocus
+            type="email"
+            value={email}
+            onChange={(e: any) => setEmail(e.target.value)}
 
-          <Form.Group controlId="email">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              autoFocus
-              type="email"
-              value={email}
-              onChange={(e: any) => setEmail(e.target.value)}
-            />
-          </Form.Group>
+          />
+        </Form.Group>
 
 
-          <Form.Group controlId="password">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Form.Group>
-          <Button type="submit" disabled={!validateForm()}>
-            Login
-          </Button>
-        </Form>
+        <Form.Group controlId="password">
+          <Form.Control
+            placeholder="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Group>
+        <Button type="submit" disabled={!validateForm()}>
+          Login
+        </Button>
+        <NavLink><b>Not a member? Sign up</b></NavLink>
+      </Form>
 
     </div>
   );

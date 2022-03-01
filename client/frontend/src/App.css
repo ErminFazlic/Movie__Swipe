@@ -15,7 +15,25 @@
   right: 0;
   bottom: 0;
   z-index: -1;
+  filter: brightness(25%);
 }
+
+.slogan{
+  text-align: center;
+  margin: 1%;
+}
+
+.slogan h1{
+  font-size:60px;
+  -webkit-text-stroke: 2px #FF5492;
+  font-weight: 600;
+  transition: 0.5s;
+}
+
+.slogan h1:hover{
+  color: #FF5492;
+}
+
 @media (min-aspect-ratio:16/9){
   .back-video{
     width: 100%;
