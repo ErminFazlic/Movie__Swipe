@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import {registerUser} from "./../api"
+import './Login.css'
 
 
 export const Register = ()=> {
@@ -27,29 +28,29 @@ export const Register = ()=> {
   }
 
   return (
-    <div className="col-lg-3">
-      <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="username">
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            autoFocus
-            type="username"
-            value={username}
-            onChange={(e : any) => setUsername(e.target.value)}
-          />
-        </Form.Group>  
+    <div className="col-12 box">
+      <Form onSubmit={handleSubmit}> 
         <Form.Group controlId="email">
-          <Form.Label>Email</Form.Label>
           <Form.Control
+          placeholder="Email"
             autoFocus
             type="email"
             value={email}
             onChange={(e : any) => setEmail(e.target.value)}
           />
         </Form.Group>
-        <Form.Group controlId="password">
-          <Form.Label>Password</Form.Label>
+        <Form.Group controlId="username">
           <Form.Control
+          placeholder="Username"
+            autoFocus
+            type="username"
+            value={username}
+            onChange={(e : any) => setUsername(e.target.value)}
+          />
+        </Form.Group> 
+        <Form.Group controlId="password">
+          <Form.Control
+          placeholder="Password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
