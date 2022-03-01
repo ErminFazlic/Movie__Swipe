@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button"
 import {registerUser} from "./../api"
 
 
-export default function Login() {
+export const Register = ()=> {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,7 +27,7 @@ export default function Login() {
   }
 
   return (
-    <div className="Login">
+    <div className="col-lg-3">
       <Form onSubmit={handleSubmit}>
       <Form.Group controlId="username">
           <Form.Label>Username</Form.Label>
@@ -62,3 +62,5 @@ export default function Login() {
     </div>
   );
 }
+
+export default Register;

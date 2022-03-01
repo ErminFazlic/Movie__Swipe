@@ -3,7 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import { addFriend } from "../api";
 
 
-function Home() {
+export const Home = () => {
     const email: any = localStorage.getItem('email')
     const [friendsUsername, setFriendsUsername] = useState("");
 
@@ -31,7 +31,7 @@ function Home() {
     }
 
     return (
-        <div className="Home">
+        <div>
             <h1>Welcome home {email}</h1>
 
             <Form onSubmit={handleSubmit}>

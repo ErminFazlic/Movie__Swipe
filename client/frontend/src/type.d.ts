@@ -17,3 +17,5 @@ type UserApiDataType = {
     status: string
     user?: IUser
 }
+
+declare module '*.mp4';

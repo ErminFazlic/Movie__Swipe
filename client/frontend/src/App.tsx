@@ -1,15 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Login from './components/Login';
-import Register from './components/Register'
+import {Login} from './components/Login';
+import {Register} from './components/Register'
+import background from './img/video.mp4';
+import logo from './img/cinema.png'
 
-
-function App() {
+export const App = () => {
   return (
-    <div className="App">
+    <div className='hero'>
+      <video autoPlay loop muted playsInline className='back-video'>
+        <source src={background} type='video/mp4'/>
+      </video>
+      <nav></nav>
+      <img src={logo}></img>
+      <h1>MovieSwipe</h1>
       <Login />
-      <Register />
     </div>
   );
 }
