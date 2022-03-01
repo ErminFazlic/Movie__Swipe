@@ -28,7 +28,7 @@ export const Register = ()=> {
   }
 
   return (
-    <div className="col-12 box">
+    <div className="col-12 px-5 box">
       <Form onSubmit={handleSubmit}> 
         <Form.Group controlId="email">
           <Form.Control
