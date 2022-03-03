@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import {registerUser} from "./../api"
+import './Login.css'
 
 
-export default function Login() {
+export const Register = ()=> {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,29 +28,29 @@ export default function Login() {
   }
 
   return (
-    <div className="Login">
-      <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="username">
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            autoFocus
-            type="username"
-            value={username}
-            onChange={(e : any) => setUsername(e.target.value)}
-          />
-        </Form.Group>  
+    <div className="col-12 px-5 box">
+      <Form onSubmit={handleSubmit}> 
         <Form.Group controlId="email">
-          <Form.Label>Email</Form.Label>
           <Form.Control
+          placeholder="Email"
             autoFocus
             type="email"
             value={email}
             onChange={(e : any) => setEmail(e.target.value)}
           />
         </Form.Group>
-        <Form.Group controlId="password">
-          <Form.Label>Password</Form.Label>
+        <Form.Group controlId="username">
           <Form.Control
+          placeholder="Username"
+            autoFocus
+            type="username"
+            value={username}
+            onChange={(e : any) => setUsername(e.target.value)}
+          />
+        </Form.Group> 
+        <Form.Group controlId="password">
+          <Form.Control
+          placeholder="Password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -62,3 +63,5 @@ export default function Login() {
     </div>
   );
 }
+
+export default Register;
