@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import { loginUser } from "./../api"
+import { getFriends } from "./../api"
 import { useNavigate } from "react-router-dom";
-import { NavLink } from "react-bootstrap";
 import './Login.css'
 
 
@@ -27,9 +27,24 @@ export const Login = () => {
       else {
         alert("Logged in")
         localStorage.setItem('email', email)
+        const response2 = getFriends(email)
+        response2.then(res2=>{
+          if (res2.status === "500"){
+            alert("Wrong")
+          }else{
+            localStorage.setItem('friends', res2.message)
+          }
+         
+        })
         navigate('/home')
       }
     })
+  }
+
+  function navigateToRegister(event: any){
+    event.preventDefault();
+
+    navigate('/register')
   }
 
   return (
@@ -58,7 +73,9 @@ export const Login = () => {
         <Button type="submit" disabled={!validateForm()}>
           Login
         </Button>
-        <NavLink><b>Not a member? Sign up</b></NavLink>
+        <Button onClick={navigateToRegister}>
+          Register an account
+          </Button>
       </Form>
 
     </div>

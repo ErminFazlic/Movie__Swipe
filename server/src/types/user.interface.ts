@@ -6,5 +6,5 @@ export interface IUser extends Document {
     username: string;
     liked: number[];
     disliked: number[];
-    friends: number[];
+    friends: string[];
   }

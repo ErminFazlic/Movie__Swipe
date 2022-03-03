@@ -35,3 +35,22 @@ export const addFriend = async (email:string, userToAdd:string): Promise<UserApi
     }
 }
 
+export const getFriends = async(email:string): Promise<UserApiDataType> => {
+    try{
+        const response: AxiosResponse<UserApiDataType> = await axios.put(baseUrl+'/users/friends', {email:email})
+        return response.data
+
+    }catch(error:any){
+        return {message:"Something went wrong", status: "500"}
+    }
+}
+
+export const deleteFriend = async(email:string, userIDToRemove:string): Promise<UserApiDataType> => {
+    try{
+        const response: AxiosResponse<UserApiDataType> = await axios.put(baseUrl+'/users/friends/remove/'+userIDToRemove, {email:email})
+        return response.data
+
+    }catch(error:any){
+        return {message:"Something went wrong", status: "500"}
+    }
+}
