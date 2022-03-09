@@ -23,7 +23,8 @@ test("A POST request to /addUser should send a response with code '201' and mess
 
     class MockUserService implements IUser {
         createTask(description: "add user"): Promise<IUser> {
-            new Request(addUser(listOfUsers))
+            //fix this to send a proper request
+            new Request()
             
             router.post('/', addUser)
             expect(0).toBe(1);
