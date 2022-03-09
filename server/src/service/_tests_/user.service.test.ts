@@ -1,6 +1,8 @@
 ﻿import {addUser, loginUser, addFriend, getFriends, deleteFriend} from '../user.service'
 import {IUser} from '../../types/user.interface'
-    
+
+
+
 //User who registered is stored in the database
 test('Register user', () => {
     
