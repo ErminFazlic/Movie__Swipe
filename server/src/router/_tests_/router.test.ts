@@ -1,5 +1,6 @@
 ﻿import {loginUser} from "../../service/user.service";
 import express from "express";
+jest.useFakeTimers()
 
 test("Login User", () => {
     const req = {
