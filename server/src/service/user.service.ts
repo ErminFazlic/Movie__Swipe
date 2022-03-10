@@ -4,8 +4,9 @@ import User from './../model/user'
 import { toUnicode } from "punycode"
 import { brotliDecompressSync } from "zlib"
 import { ObjectId } from "mongoose/node_modules/mongodb"
+import { AnyMxRecord } from "dns"
 
-const addUser = async (req:Request, res: Response):Promise<void> => {
+const addUser = async (req:Request, res: Response):Promise<any> => {
     try{
 
         const body = req.body as Pick<IUser, 'email' | 'password' | 'username'>
