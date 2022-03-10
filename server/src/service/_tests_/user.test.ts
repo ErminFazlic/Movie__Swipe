@@ -1,9 +1,6 @@
-import { IUser } from "../../types/user.interface";
-import User from '../../model/user'
-import {deleteFriend,getFriends,addUser}from "../../service/user.service";
-import * as us from "../../service/user.service";
-import express, { Request, Response} from "express";
-import {Document } from 'mongoose'
+import {addUser}from "../../service/user.service";
+import express from "express";
+
 
 test("Register User", () => {
     const req = {
@@ -12,16 +9,11 @@ test("Register User", () => {
             password:  "6666",
             username:  "valeria",
         }
-      }
+    }
 
-    const res = {
-      }
-
+    const res = {};
     const response = addUser(req as express.Request, res as express.Response)
-   response.then(res=>{
+    response.then(res=>{
         expect(res.statusCode).toBe(201)
     }).catch((e : any) => fail(e.message));
-     
-}   
-);
-
+});
