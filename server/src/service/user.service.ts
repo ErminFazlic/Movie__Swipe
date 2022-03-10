@@ -1,5 +1,5 @@
 import { Response, Request } from "express"
-import {IUser} from './../types/user.interface'
+import {IUser} from '../types/user.interface'
 import User from './../model/user'
 import { toUnicode } from "punycode"
 import { brotliDecompressSync } from "zlib"

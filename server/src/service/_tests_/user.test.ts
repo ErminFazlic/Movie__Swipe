@@ -1,4 +1,4 @@
-import {addUser}from "../../service/user.service";
+import {addFriend, addUser} from "../../service/user.service";
 import express from "express";
 
 
@@ -17,3 +17,18 @@ test("Register User", () => {
         expect(res.statusCode).toBe(201)
     }).catch((e : any) => fail(e.message));
 });
+
+/*
+test("Add friends", () => {
+    const req = {
+        body: {
+            email: "example@gmail.com"
+        }
+    }
+
+    const res = {};
+    const response = addFriend(req as express.Request, res as express.Response)
+    response.then(res=>{
+        expect(res.statusCode).toBe(200)
+    }).catch((e : any) => fail(e.message));
+});*/
