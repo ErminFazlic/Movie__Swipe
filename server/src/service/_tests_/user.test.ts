@@ -5,7 +5,7 @@ import * as us from "../../service/user.service";
 import express, { Request, Response} from "express";
 import {Document } from 'mongoose'
 
-test("Add a new user", () => {
+test("Register User", () => {
     const req = {
         body: {
             email: "valeria@",
