@@ -33,7 +33,12 @@ const likeMovie = async (req: Request, res: Response): Promise<void> => {
         if(matches.length === 0){
             res.status(200).json({message: 'No matches'})
         }
-        res.status(200).json({ message: JSON.stringify(matches) })
+        const matchedFriends: any = await User.find({ _id: {$in: matches}})
+        let friends: string[] = []
+        matchedFriends.forEach((element: { username: string }) => {
+            friends.push(element.username)
+        });
+        res.status(200).json({ message: JSON.stringify(friends) })
 
     } catch (e: any) {
         res.status(500).send(e.message);
@@ -86,11 +91,16 @@ const getMatches = async (req: Request, res: Response): Promise<any> => {
         }
 
         const matches = user.liked.filter((value: any) => friend.liked.includes(value))
+        const movies = await Movie.find({_id: {$in: matches}})
+        let movieNames : string[] = []
         if(matches.length === 0){
             res.status(200).json({message: 'No matches'})
             return
         }
-        res.status(200).json({message: JSON.stringify(matches)})
+        movies.forEach(element => {
+            movieNames.push(element.name)
+        });
+        res.status(200).json({message: JSON.stringify(movieNames)})
 
 
     } catch (e: any) {

@@ -1,11 +1,12 @@
 import React, { useState } from "react"
 import { Form, Button } from "react-bootstrap";
-import { addFriend, getFriends, deleteFriend } from "../api";
+import { addFriend, getFriends, deleteFriend, getMatches } from "../api";
 import { useNavigate } from "react-router-dom";
 
 export const Friends = () => {
     const email: any = localStorage.getItem('email')
     const friends: any = localStorage.getItem('friends')
+    const username: any = localStorage.getItem('username')
     const navigate = useNavigate()
     let friendslist: IUser[] = []
 
@@ -41,16 +42,25 @@ export const Friends = () => {
     }
 
     function deleteAFriend( item : any) {
-        const response = deleteFriend(email, item.item)
+        const response = deleteFriend(email, item.item._id)
         response.then(res=> {
             if (res.status === "500"){
                 alert("Something went wrong please try again")
             }else{
-                alert(res.message)
+                const movies = JSON.parse(res.message)
+                alert(movies[0].name)
                 updateList()
             }
         })
         
+    }
+    function viewMatches(item:any){
+        if(username!= null){
+            const response = getMatches(username, item.item.username)
+            response.then(res=>{
+                alert("You have both liked the following movies: " +res.message)
+            })
+        }  
     }
 
     function updateList(){
@@ -71,14 +81,30 @@ export const Friends = () => {
             <table>
                 <thead>
                     <tr>
-                        <th>Friends</th>
+                        <th>Friends (Click to remove)</th>
                     </tr>
                 </thead>
                 <tbody>
                     {friendslist.map(item => {
                         return (
                             <tr >
-                                <td><Button onClick={() => deleteAFriend({item})}>{item}</Button></td>
+                                <td><Button onClick={() => deleteAFriend({item})}>{item.username}</Button></td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Friends (Click to view matches)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {friendslist.map(item => {
+                        return (
+                            <tr >
+                                <td><Button onClick={() => viewMatches({item})}>{item.username}</Button></td>
                             </tr>
                         );
                     })}

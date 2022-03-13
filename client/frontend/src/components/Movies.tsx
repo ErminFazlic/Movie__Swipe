@@ -25,7 +25,7 @@ export const Movies = () => {
                 alert(res.message)
             }
             else {
-                alert(res.message)
+                alert("The following friends have also liked " + movie.name + ":"+res.message)
                 updateMovie()
             }
         })
@@ -67,6 +67,7 @@ export const Movies = () => {
             {movie === null &&
                 <h2>More movies coming soon!</h2>
             }
+            {updateMovie()}
         </div>
     );
 }

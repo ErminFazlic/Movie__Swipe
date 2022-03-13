@@ -18,6 +18,7 @@ export const Login = () => {
 
   function handleSubmit(event: any) {
     event.preventDefault();
+    localStorage.clear()
     const response = loginUser(email, password)
     response.then(res => {
       if (res.status === "401") {
