@@ -3,6 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import { addFriend } from "../api";
 import Friends from "./Friends";
 import Movies from "./Movies"
+import Profile from "./Profile";
 
 
 export const Home = () => {
@@ -15,6 +16,7 @@ export const Home = () => {
 
             <Friends />
             <Movies />
+            <Profile />
         </div>
     );
 }

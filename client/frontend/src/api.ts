@@ -35,6 +35,17 @@ export const addFriend = async (email:string, userToAdd:string): Promise<UserApi
     }
 }
 
+export const changePassword = async(email:string, password:string):Promise<UserApiDataType> => {
+    try{
+
+        const response: AxiosResponse<UserApiDataType> = await axios.put(baseUrl+'/users/changePassword', {email:email, password:password})
+        return response.data
+        
+    }catch(error:any){
+        return {message:"Something went wrong", status: "500"}
+    }
+}
+
 export const getFriends = async(email:string): Promise<UserApiDataType> => {
     try{
         const response: AxiosResponse<UserApiDataType> = await axios.put(baseUrl+'/users/friends', {email:email})
