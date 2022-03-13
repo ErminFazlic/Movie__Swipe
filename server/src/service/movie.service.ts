@@ -24,7 +24,11 @@ const likeMovie = async (req: Request, res: Response): Promise<void> => {
             return
         }
         user.liked.push(movie._id)
+        movie.likes.push(user._id)
+
         const updateUser: IUser | null = await User.findByIdAndUpdate(user._id, user)
+        const updateMovie: IMovie | null = await Movie.findByIdAndUpdate(movie._id, movie)
+
         const matches = user.friends.filter((value: any) => movie.likes.includes(value))
         if(matches.length === 0){
             res.status(200).json({message: 'No matches'})
@@ -129,15 +133,12 @@ const getMovie = async (req: Request, res: Response): Promise<any> => {
             return
         }
 
-        const seenMovies = user.liked.concat(user.disliked).filter(function(value: any, index: any, self: string | any[]) { 
-            return self.indexOf(value) === index; 
-        });
+        const seenMovies = user.liked.concat(user.disliked)
+        if(seenMovies.length < movies.length){
+            res.status(200).json({message: JSON.stringify(movies[seenMovies.length])})
+            return
+        }
 
-        movies.forEach((element: any) => {
-            if(!seenMovies.includes(element)){
-                res.status(200).json({message: JSON.stringify(element)})
-            }
-        });
         res.status(200).json({message: 'No more movies to show'})
         
     }catch(e:any){

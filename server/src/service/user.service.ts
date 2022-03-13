@@ -40,7 +40,7 @@ const loginUser = async (req:Request, res: Response):Promise<any> => {
             if(user.password != body.password){
                 res.status(401).json({message:'Wrong email or password'}) 
             }
-            res.status(200).send(user.username)
+            res.status(200).json({message:user.username})
         }
 
     }catch(e: any){
