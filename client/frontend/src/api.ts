@@ -94,3 +94,13 @@ export const getLikedMovies = async(user:string):Promise<MovieApiDataType> => {
         return {message:"Something went wrong", status:"500"}
     }
 }
+
+export const getMovie = async(user:string):Promise<MovieApiDataType> => {
+    try{
+        const response: AxiosResponse<MovieApiDataType> = await axios.get(baseUrl+'/movie/'+user+'/movie')
+        return response.data
+
+    }catch(error:any){
+        return {message:"Something went wrong", status:"500"}
+    }
+}

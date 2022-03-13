@@ -112,4 +112,37 @@ const getLikedMovies = async (req: Request, res: Response): Promise<any> => {
     }
 }
 
-export { likeMovie, dislikeMovie, getMatches, getLikedMovies }
+const getMovie = async (req: Request, res: Response): Promise<any> => {
+    try{
+        const{
+            params: {loggedInUser}
+        } = req
+
+        const user: any = await User.findOne({ username: loggedInUser })
+        if (user === null || user === undefined) {
+            res.status(401).json({ message: 'You are not logged in' })
+            return
+        }
+        const movies: any = await Movie.find({})
+        if (user === null || user === undefined) {
+            res.status(500).json({ message: 'Something went wrong' })
+            return
+        }
+
+        const seenMovies = user.liked.concat(user.disliked).filter(function(value: any, index: any, self: string | any[]) { 
+            return self.indexOf(value) === index; 
+        });
+
+        movies.forEach((element: any) => {
+            if(!seenMovies.includes(element)){
+                res.status(200).json({message: JSON.stringify(element)})
+            }
+        });
+        res.status(200).json({message: 'No more movies to show'})
+        
+    }catch(e:any){
+        res.status(500).send(e.message);
+    }
+}
+
+export { likeMovie, dislikeMovie, getMatches, getLikedMovies, getMovie }
