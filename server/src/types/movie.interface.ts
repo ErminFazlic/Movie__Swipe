@@ -6,4 +6,5 @@ export interface IMovie extends Document
     genre : string;
     imgUrl : string;
     release : number;
+    likes: string[];
 }

@@ -18,6 +18,10 @@ const movieSchema: Schema = new Schema({
         type: Number,
         required: true
     },
+    likes:{
+        type: Array,
+        required: true
+    },
 }, {timestamps: true})
 
 export default model<IMovie>('Movie', movieSchema)
