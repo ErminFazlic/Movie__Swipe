@@ -67,12 +67,11 @@ const dislikeMovie = async (req: Request, res: Response): Promise<void> => {
 const getMatches = async (req: Request, res: Response): Promise<any> => {
     try {
 
-        const body = req.body as Pick<IUser, 'username'>
         const {
-            params: { loggedInUser }
+            params: { loggedInUser, friendUser }
         } = req
         const user: any = await User.findOne({ username: loggedInUser })
-        const friend: any = await User.findOne({ username: body.username })
+        const friend: any = await User.findOne({ username: friendUser })
         if (user === null || user === undefined) {
             res.status(401).json({ message: 'You are not logged in' })
             return
