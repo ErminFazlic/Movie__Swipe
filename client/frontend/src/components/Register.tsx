@@ -27,7 +27,7 @@ export const Register = ()=> {
         }
         else{
             alert("Created account")
-            navigate("/")
+            navigate("/login", {replace :true})
         }
     })
   }

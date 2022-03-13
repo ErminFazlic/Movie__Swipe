@@ -48,6 +48,25 @@ const loginUser = async (req:Request, res: Response):Promise<any> => {
     }
 }
 
+const changePassword = async (req:Request, res: Response):Promise<any> => {
+    try{
+
+        const body = req.body as Pick<IUser, 'email'|'password'>
+        const user : any = await User.findOne({email: body.email})
+
+        if (user == null){
+            res.status(401).json({message:'Not logged in'})
+        }else{
+            user.password = body.password
+            const updateUser: IUser | null = await User.findByIdAndUpdate(user._id, user)
+            res.status(200).json({message: 'Updated password'})
+        }
+
+    }catch(e:any){
+        res.status(500).send(e.message)
+    }
+}
+
 const addFriend = async (req:Request, res:Response):Promise<any> => {
     try{
 
@@ -129,4 +148,4 @@ const deleteFriend = async (req:Request, res:Response):Promise<any> => {
 
 
 
-export {addUser, loginUser, addFriend, getFriends, deleteFriend}
+export {addUser, loginUser, addFriend, getFriends, deleteFriend, changePassword}

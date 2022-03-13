@@ -12,6 +12,7 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate()
 
+
   function validateForm() {
     return email.length > 0 && password.length > 0;
   }
@@ -41,8 +42,8 @@ export const Login = () => {
         response3.then(res3=>{
           localStorage.setItem('JSONmovie', res3.message)
         })
-
-        navigate('/home')
+          navigate('/home')
+        
       }
     })
   }
