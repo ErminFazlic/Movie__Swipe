@@ -54,3 +54,33 @@ export const deleteFriend = async(email:string, userIDToRemove:string): Promise<
         return {message:"Something went wrong", status: "500"}
     }
 }
+
+export const likeMovie = async(username:string, movieName:string): Promise<MovieApiDataType> => {
+    try{
+        const response: AxiosResponse<MovieApiDataType> = await axios.put(baseUrl+'/movie/like/'+username, {name:movieName})
+        return response.data
+
+    }catch(error:any){
+        return {message:"Something went wrong", status:"500"}
+    }
+}
+
+export const dislikeMovie = async(username:string, movieName:string): Promise<MovieApiDataType> => {
+    try{
+        const response: AxiosResponse<MovieApiDataType> = await axios.put(baseUrl+'/movie/dislike/'+username, {name:movieName})
+        return response.data
+
+    }catch(error:any){
+        return {message:"Something went wrong", status:"500"}
+    }
+}
+
+export const getMatches = async(user:string, friend:string): Promise<MovieApiDataType> => {
+    try{
+        const response: AxiosResponse<MovieApiDataType> = await axios.get(baseUrl+'/movie/'+user+'/matches/'+friend)
+        return response.data
+
+    }catch(error:any){
+        return {message:"Something went wrong", status:"500"}
+    }
+}
