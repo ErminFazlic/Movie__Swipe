@@ -1,6 +1,6 @@
 import {addFriend, addUser} from "../../service/user.service";
 import express from "express";
-jest.useFakeTimers()
+//jest.useFakeTimers()
 
 
 test("Register User", () => {
