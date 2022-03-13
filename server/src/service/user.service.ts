@@ -41,7 +41,7 @@ const loginUser = async (req:Request, res: Response):Promise<any> => {
             if(user.password != body.password){
                 res.status(401).json({message:'Wrong email or password'}) 
             }
-            res.status(200).send(user.username)
+            res.status(200).json({message:user.username})
         }
 
     }catch(e: any){
@@ -92,7 +92,8 @@ const getFriends = async (req:Request, res:Response):Promise<any> => {
         if(user === null){
             res.status(401).json({message: 'You are not logged in'})
         }
-        res.status(200).json({message:JSON.stringify(user.friends)})
+        const friends : any = await User.find({ _id: {$in: user.friends}})
+        res.status(200).json({message:JSON.stringify(friends)})
         
 
     }catch(e: any){

@@ -13,5 +13,4 @@ router.put("/friends", getFriends)
 
 router.put("/friends/remove/:userIDToRemove", deleteFriend)
 
-
 export default router

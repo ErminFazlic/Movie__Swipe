@@ -2,5 +2,9 @@ import {Document} from 'mongoose'
 
 export interface IMovie extends Document
  {
-    likes: number[];
+    name : string;
+    genre : string;
+    imgUrl : string;
+    release : number;
+    likes: string[];
 }
