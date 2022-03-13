@@ -94,4 +94,22 @@ const getMatches = async (req: Request, res: Response): Promise<any> => {
     }
 }
 
-export { likeMovie, dislikeMovie, getMatches }
+const getLikedMovies = async (req: Request, res: Response): Promise<any> => {
+    try{
+        const{
+            params: {loggedInUser}
+        } = req
+
+        const user: any = await User.findOne({ username: loggedInUser })
+        if (user === null || user === undefined) {
+            res.status(401).json({ message: 'You are not logged in' })
+            return
+        }
+
+        res.status(200).json({message: JSON.stringify(user.liked)})
+    }catch(e:any){
+        res.status(500).send(e.message);
+    }
+}
+
+export { likeMovie, dislikeMovie, getMatches, getLikedMovies }
