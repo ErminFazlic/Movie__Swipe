@@ -1,8 +1,8 @@
-import {addFriend, addUser} from "../../service/user.service";
+import {addFriend, addUser} from "../user.service";
 import express from "express";
 //jest.useFakeTimers()
 
-
+//unit test för varje metod i movie.service user.service, integration test också. frontend testing
 test("Register User", () => {
     const req = {
         body: {
