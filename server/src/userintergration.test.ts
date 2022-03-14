@@ -1,5 +1,4 @@
 import User from './model/user'
-
 import SuperTest from "supertest";
 import app from "../server"
 import {IUser} from "./types/user.interface"
@@ -21,8 +20,8 @@ test("Add a user and login",  async() => {
                 });
 
     request.put("/")
-            .then((res) => {
-            expect(res.statusCode).toBe(200);
-             }).catch((e : any) => fail(e.message));
+                .then((res) => {
+                expect(res.statusCode).toBe(200);
+            }).catch((e : any) => fail(e.message));
    
    });
