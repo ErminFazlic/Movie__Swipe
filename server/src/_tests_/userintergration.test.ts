@@ -1,7 +1,7 @@
-import User from './model/user'
+import User from '../model/user'
 import SuperTest from "supertest";
-import app from "../server"
-import {IUser} from "./types/user.interface"
+import app from '../../server'
+import {IUser} from "../types/user.interface"
 jest.useFakeTimers()
 
 const express = require('express') 
