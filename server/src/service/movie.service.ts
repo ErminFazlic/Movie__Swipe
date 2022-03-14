@@ -3,6 +3,7 @@ import { IMovie } from './../types/movie.interface'
 import Movie from './../model/movie'
 import User from "../model/user"
 import { IUser } from "../types/user.interface"
+import mongoose from "mongoose"
 
 const likeMovie = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -139,7 +140,7 @@ const getMovie = async (req: Request, res: Response): Promise<any> => {
             return
         }
         const movies: any = await Movie.find({})
-        if (user === null || user === undefined) {
+        if (movies === null || movies === undefined) {
             res.status(500).json({ message: 'Something went wrong' })
             return
         }
@@ -157,4 +158,38 @@ const getMovie = async (req: Request, res: Response): Promise<any> => {
     }
 }
 
-export { likeMovie, dislikeMovie, getMatches, getLikedMovies, getMovie }
+const removeLike = async (req: Request, res: Response): Promise<any> => {
+    try{
+        const body = req.body as Pick<IMovie, 'name'>
+
+        const{
+            params: {loggedInUser}
+        } = req
+
+        const user: any = await User.findOne({ username: loggedInUser })
+        if (user === null || user === undefined) {
+            res.status(401).json({ message: 'You are not logged in' })
+            return
+        }
+
+        var id = new mongoose.Types.ObjectId(body.name);
+
+        user.liked = removeItemOnce(user.liked, id)
+
+        const updateUser: IUser | null = await User.findByIdAndUpdate(user._id, user)
+        res.status(200).json({ message: 'ok' })
+        
+    }catch(e:any){
+        res.status(500).send(e.message);
+    }
+}
+
+function removeItemOnce(arr: any[], value: any) {
+    var index = arr.indexOf(value);
+    if (index > -1) {
+      arr.splice(index, 1);
+    }
+    return arr;
+  }
+
+export { likeMovie, dislikeMovie, getMatches, getLikedMovies, getMovie, removeLike }
