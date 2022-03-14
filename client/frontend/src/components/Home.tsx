@@ -15,13 +15,8 @@ export const Home = () => {
     return (
         <div>
             <Navigation />
-            <Container>
-                <h1>Welcome home {username}</h1>
-
-                <Friends />
+            <Container>        
                 <Movies />
-                <Profile />
-
             </Container>
 
         </div>
