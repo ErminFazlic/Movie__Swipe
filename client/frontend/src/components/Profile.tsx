@@ -39,14 +39,13 @@ export const Profile = () => {
 
     function logout(){
         localStorage.clear()
-        //ugly and bad practice, could not get react router to work. It just refreshed the same page
-        return window.location.href="http://localhost:3000/login"
+        navigate('/')
     }
 
 
     return (
 
-        <div>
+        <div className="container">
 
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="password">

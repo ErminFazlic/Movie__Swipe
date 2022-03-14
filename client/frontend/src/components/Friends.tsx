@@ -47,8 +47,7 @@ export const Friends = () => {
             if (res.status === "500"){
                 alert("Something went wrong please try again")
             }else{
-                const movies = JSON.parse(res.message)
-                alert(movies[0].name)
+                alert("Removed "+ item.item.username + " from friends list")
                 updateList()
             }
         })
@@ -58,7 +57,12 @@ export const Friends = () => {
         if(username!= null){
             const response = getMatches(username, item.item.username)
             response.then(res=>{
-                alert("You have both liked the following movies: " +res.message)
+                if(res.message === 'No matches'){
+                    alert("You and " + item.item.username + " have no matches. Start swiping!")
+                }else{
+                    alert("You have both liked the following movies: " +res.message)
+                }
+                
             })
         }  
     }
@@ -70,14 +74,14 @@ export const Friends = () => {
                 alert("Wrong")
             } else {
                 localStorage.setItem('friends', res.message)
-                navigate('/home')           
+                navigate('/friends')           
             }
 
         })
     }
     return (
 
-        <div>
+        <div className="container">
             <table>
                 <thead>
                     <tr>

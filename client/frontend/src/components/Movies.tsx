@@ -7,7 +7,7 @@ export const Movies = () => {
     const JSONmovie: any = localStorage.getItem('JSONmovie')
     const username: any = localStorage.getItem('username')
     const navigate = useNavigate()
-    let movie: any = null
+    let movie : any = null
     if (JSONmovie != null) {
         movie = JSON.parse(JSONmovie)
     }
@@ -67,7 +67,7 @@ export const Movies = () => {
             {movie === null &&
                 <h2>More movies coming soon!</h2>
             }
-            {updateMovie()}
+            
         </div>
     );
 }
