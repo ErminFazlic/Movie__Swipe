@@ -92,28 +92,13 @@ export const Friends = () => {
                     {friendslist.map(item => {
                         return (
                             <tr >
-                                <td><Button onClick={() => deleteAFriend({item})}>{item.username}</Button></td>
+                                <td><Button onClick={() => viewMatches({item})}>{item.username}</Button><Button onClick={() => deleteAFriend({item})}>Remove Friend</Button></td>
                             </tr>
                         );
                     })}
                 </tbody>
             </table>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Friends (Click to view matches)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {friendslist.map(item => {
-                        return (
-                            <tr >
-                                <td><Button onClick={() => viewMatches({item})}>{item.username}</Button></td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
+
 
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="username">
