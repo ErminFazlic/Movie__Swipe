@@ -26,7 +26,7 @@ export const Navigation = () => {
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
                             <NavLink href="/friends">Friends</NavLink>
-                            <NavLink href="#likedmovies">Liked Movies</NavLink>
+                            <NavLink href="/likes">Liked Movies</NavLink>
                         </Nav>
                         <Navbar.Collapse className="justify-content-end">
                             <Navbar.Text>

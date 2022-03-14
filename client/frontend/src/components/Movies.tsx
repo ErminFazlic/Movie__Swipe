@@ -7,7 +7,7 @@ export const Movies = () => {
     const JSONmovie: any = localStorage.getItem('JSONmovie')
     const username: any = localStorage.getItem('username')
     const navigate = useNavigate()
-    let movie : any = null
+    let movie: any = null
     if (JSONmovie != null) {
         movie = JSON.parse(JSONmovie)
     }
@@ -25,8 +25,22 @@ export const Movies = () => {
                 alert(res.message)
             }
             else {
-                alert("The following friends have also liked " + movie.name + ":"+res.message)
-                updateMovie()
+                if (res.message === 'No matches') {
+                    alert("None of your friends have liked this movie")
+                    const response2 = getLikedMovies(username)
+                    response2.then(res2 => {
+                        localStorage.setItem('likedMovies', res2.message)
+                    })
+                    updateMovie()
+                } else {
+                    alert("The following friends have also liked " + movie.name + ":" + res.message)
+                    const response3 = getLikedMovies(username)
+                    response3.then(res3 => {
+                        localStorage.setItem('likedMovies', res3.message)
+                    })
+                    updateMovie()
+                }
+
             }
         })
     }
@@ -50,11 +64,11 @@ export const Movies = () => {
     }
     function updateMovie() {
         const response3 = getMovie(username)
-        response3.then(res3=>{
-          localStorage.setItem('JSONmovie', res3.message)
-          navigate('/home')
+        response3.then(res3 => {
+            localStorage.setItem('JSONmovie', res3.message)
+            navigate('/home')
         })
-       
+
     }
     return (
 
@@ -67,7 +81,7 @@ export const Movies = () => {
             {movie === null &&
                 <h2>More movies coming soon!</h2>
             }
-            
+
         </div>
     );
 }

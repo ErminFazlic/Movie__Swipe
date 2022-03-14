@@ -115,3 +115,13 @@ export const getMovie = async(user:string):Promise<MovieApiDataType> => {
         return {message:"Something went wrong", status:"500"}
     }
 }
+
+export const removeLike = async(user:string, movie:string):Promise<MovieApiDataType> => {
+    try{
+        const response: AxiosResponse<MovieApiDataType> = await axios.put(baseUrl+'/movie/'+user+'/remove', {name:movie})
+        return response.data
+
+    }catch(error:any){
+        return {message:"Something went wrong", status:"500"}
+    }
+}

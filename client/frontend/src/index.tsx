@@ -9,6 +9,7 @@ import Register from './components/Register';
 import Friends from './components/Friends';
 import Navigation from './components/Navigation'
 import Profile from './components/Profile';
+import Likes from './components/Likes';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -20,6 +21,7 @@ ReactDOM.render(
         <Route path="/register" element={<Register />} ></Route>
         <Route path="/friends" element={<><Navigation /><Friends /></>} ></Route>
         <Route path="/profile" element={<><Navigation /><Profile /></>} ></Route>
+        <Route path="/likes" element={<><Navigation /><Likes /></>} ></Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
