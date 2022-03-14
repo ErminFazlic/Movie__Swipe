@@ -119,8 +119,9 @@ const getLikedMovies = async (req: Request, res: Response): Promise<any> => {
             res.status(401).json({ message: 'You are not logged in' })
             return
         }
+        const movies : any = await Movie.find({ _id: {$in: user.liked}})
 
-        res.status(200).json({message: JSON.stringify(user.liked)})
+        res.status(200).json({message: JSON.stringify(movies)})
     }catch(e:any){
         res.status(500).send(e.message);
     }

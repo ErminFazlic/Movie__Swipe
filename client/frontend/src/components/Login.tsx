@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
-import { loginUser, getFriends, getMovie } from "./../api"
+import { loginUser, getFriends, getMovie, getLikedMovies } from "./../api"
 import { useNavigate } from "react-router-dom";
 import './Login.css'
 
@@ -41,6 +41,10 @@ export const Login = () => {
         const response3 = getMovie(res.message)
         response3.then(res3=>{
           localStorage.setItem('JSONmovie', res3.message)
+        })
+        const response4 = getLikedMovies(res.message)
+        response4.then(res4=>{
+          localStorage.setItem('likedMovies', res4.message)
         })
           navigate('/home')
         
