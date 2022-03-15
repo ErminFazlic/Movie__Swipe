@@ -1,10 +1,7 @@
-import React from 'react';
 import './App.css';
 import { Login } from './components/Login';
-import { Register } from './components/Register'
 import background from './img/video.mp4';
 import logo from './img/cinema.png'
-import { Container } from 'react-bootstrap';
 
 export const App = () => {
   return (
@@ -17,8 +14,6 @@ export const App = () => {
       <img className='col-3' src={logo}></img>
       <Login />
       </div>
-
-
     </div>
   );
 }

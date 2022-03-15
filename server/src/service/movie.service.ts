@@ -30,12 +30,15 @@ const likeMovie = async (req: Request, res: Response): Promise<void> => {
         const updateUser: IUser | null = await User.findByIdAndUpdate(user._id, user)
         const updateMovie: IMovie | null = await Movie.findByIdAndUpdate(movie._id, movie)
 
+        //check if a friend has also liked this movie then return those friends
         const matches = user.friends.filter((value: any) => movie.likes.includes(value))
         if(matches.length === 0){
             res.status(200).json({message: 'No matches'})
         }
+
         const matchedFriends: any = await User.find({ _id: {$in: matches}})
         let friends: string[] = []
+
         matchedFriends.forEach((element: { username: string }) => {
             friends.push(element.username)
         });
@@ -80,8 +83,10 @@ const getMatches = async (req: Request, res: Response): Promise<any> => {
         const {
             params: { loggedInUser, friendUser }
         } = req
+
         const user: any = await User.findOne({ username: loggedInUser })
         const friend: any = await User.findOne({ username: friendUser })
+
         if (user === null || user === undefined) {
             res.status(401).json({ message: 'You are not logged in' })
             return
@@ -91,8 +96,10 @@ const getMatches = async (req: Request, res: Response): Promise<any> => {
             return
         }
 
+        //Get the intersection of the two user's liked arrays and then get the movie
         const matches = user.liked.filter((value: any) => friend.liked.includes(value))
         const movies = await Movie.find({_id: {$in: matches}})
+
         let movieNames : string[] = []
         if(matches.length === 0){
             res.status(200).json({message: 'No matches'})
@@ -128,6 +135,7 @@ const getLikedMovies = async (req: Request, res: Response): Promise<any> => {
     }
 }
 
+//Retrieves a movie that the user has not liked/disliked so they can do so
 const getMovie = async (req: Request, res: Response): Promise<any> => {
     try{
         const{
@@ -183,7 +191,7 @@ const removeLike = async (req: Request, res: Response): Promise<any> => {
         res.status(500).send(e.message);
     }
 }
-
+//helper function for removeLike
 function removeItemOnce(arr: any[], value: any) {
     var index = arr.indexOf(value);
     if (index > -1) {

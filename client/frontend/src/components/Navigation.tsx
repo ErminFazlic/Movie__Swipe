@@ -1,6 +1,4 @@
-import React from "react"
 import { Navbar, Nav, NavLink, Container, } from "react-bootstrap";
-import NavbarCollapse from "react-bootstrap/esm/NavbarCollapse";
 import logo from '../img/cinema.png'
 
 

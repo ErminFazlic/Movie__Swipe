@@ -1,14 +1,12 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { Form, Button } from "react-bootstrap";
 import { changePassword } from "../api";
-import { Link, useNavigate } from "react-router-dom";
-import App from "../App";
-import Login from "./Login";
+import { useNavigate } from "react-router-dom";
+
 
 
 export const Profile = () => {
     const email: any = localStorage.getItem('email')
-    const username: any = localStorage.getItem('username')
     const navigate = useNavigate()
 
     const [newPassword, setNewPassword] = useState("");
