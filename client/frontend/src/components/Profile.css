@@ -1,0 +1,44 @@
+.changepass {
+  font-family: Helvetica;
+  color: rgb(0, 0, 0);
+  padding: 30px 0px;
+  border-radius: 10px;
+  float: left;
+}
+.changepass h3 {
+  text-align: center;
+}
+
+.changepass input {
+  display: block;
+  margin: 20px auto;
+  padding: 15px;
+}
+.changepass input:focus,
+.box input:active,
+.box button:focus,
+.box button:active {
+  outline: none;
+}
+
+.changepass button {
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-size: 20px;
+  width: 100%;
+  margin: 20px auto;
+  display: block;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.changepass button:hover {
+  background: #ff5492;
+}
+.changepass a {
+  font-size: 15px;
+  text-align: center;
+}
+.changepass a:hover {
+  color: #ff5492;
+}

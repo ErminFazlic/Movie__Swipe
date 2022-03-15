@@ -1,0 +1,7 @@
+.btn-primary-1{
+    transition: 0.5s;
+    width: 100%;
+}
+.btn-primary-1:hover{
+    background-color: red;
+}

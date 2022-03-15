@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Button } from "react-bootstrap";
 import { removeLike, getLikedMovies } from "../api";
 import { useNavigate } from "react-router-dom";
+import './Likes.css'
 
 export const Likes = () => {
     const username: any = localStorage.getItem('username')
@@ -16,47 +17,47 @@ export const Likes = () => {
     }
 
 
-    function removeLikedMovie( item : any) {
+    function removeLikedMovie(item: any) {
         const response = removeLike(username, item.item._id)
 
-        response.then(res=>{
-            if(res.status==='401'){
+        response.then(res => {
+            if (res.status === '401') {
                 alert(res.message)
-            }else if(res.status==='500'){
+            } else if (res.status === '500') {
                 alert(res.message)
-            }else{
-                alert("Successfully removed "+ item.item.name + " from your liked list")
+            } else {
+                alert("Successfully removed " + item.item.name + " from your liked list")
                 updateList()
             }
         })
     }
-    function updateList(){
+    function updateList() {
         const response = getLikedMovies(username)
-        response.then(res=>{
-          localStorage.setItem('likedMovies', res.message)
-          navigate('/likes')
-        })  
+        response.then(res => {
+            localStorage.setItem('likedMovies', res.message)
+            navigate('/likes')
+        })
     }
-    
+
     return (
 
         <div className="container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Liked movies, click to remove!</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {movieList.map(item => {
-                        return (
-                            <tr >
-                                <td><Button onClick={() => removeLikedMovie({item})}>{item.name}</Button></td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
+            <h3 className="text-center">Liked movies, click to remove!</h3>
+            <div className="d-flex justify-content-center">
+                
+                <table className="">
+                    <tbody>
+                        {movieList.map(item => {
+                            return (
+                                <tr >
+                                    <td><Button className="my-1 btn-primary-1" onClick={() => removeLikedMovie({ item })}>{item.name}</Button></td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     );
 }

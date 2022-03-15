@@ -1,0 +1,28 @@
+.btn-primary-remove{
+    transition: 0.5s;
+    background-color: red;
+    width: 25%;
+}
+
+.btn-primary-remove:hover{
+    background-color: rgb(226, 0, 0);
+}
+
+.btn-primary-friend{
+    transition: 0.5s;
+    width: 75%;
+}
+
+.tablewidth{
+    width: 100%;
+
+}
+
+@media (max-width: 991.98px) { 
+
+    .tablewidth{
+        width: 100%;
+    
+    }
+
+}
