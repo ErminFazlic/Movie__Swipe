@@ -1,12 +1,12 @@
-import React, { useState } from "react"
 import { Button } from "react-bootstrap";
-import { likeMovie, dislikeMovie, getMatches, getLikedMovies, getMovie } from "../api";
+import { likeMovie, dislikeMovie, getLikedMovies, getMovie } from "../api";
 import { useNavigate } from "react-router-dom";
 
 export const Movies = () => {
     const JSONmovie: any = localStorage.getItem('JSONmovie')
     const username: any = localStorage.getItem('username')
     const navigate = useNavigate()
+    
     let movie: any = null
     if (JSONmovie != null) {
         movie = JSON.parse(JSONmovie)

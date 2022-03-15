@@ -1,9 +1,6 @@
 import { Response, Request } from "express"
 import {IUser} from './../types/user.interface'
 import User from './../model/user'
-import { toUnicode } from "punycode"
-import { brotliDecompressSync } from "zlib"
-import { ObjectId } from "mongoose/node_modules/mongodb"
 
 const addUser = async (req:Request, res: Response):Promise<void> => {
     try{
@@ -110,6 +107,7 @@ const getFriends = async (req:Request, res:Response):Promise<any> => {
         if(user === null){
             res.status(401).json({message: 'You are not logged in'})
         }
+        //finds users based on id that is also in users friendslist
         const friends : any = await User.find({ _id: {$in: user.friends}})
         res.status(200).json({message:JSON.stringify(friends)})
         
@@ -131,12 +129,10 @@ const deleteFriend = async (req:Request, res:Response):Promise<any> => {
         if(user === null){
             res.status(401).json({message: 'You are not logged in'})
         }
-        console.log(user.friends)
-        user.friends.forEach((element: any) => {
-            console.log(element.toString())
-        });
+        
+        //turn the objectID to string then compare with the friends ID to remove it
         user.friends = user.friends.filter((item: any) => item.toString() !== userIDToRemove)
-        console.log(user.friends)
+        
         const updateUser: IUser | null = await User.findByIdAndUpdate(user._id, user)
 
         res.status(200).json({message:'Removed friend'})

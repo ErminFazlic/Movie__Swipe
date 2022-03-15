@@ -1,10 +1,9 @@
-import React, { useState } from "react"
-import { Form, Button } from "react-bootstrap";
+import { useState } from "react"
+import { Button } from "react-bootstrap";
 import { removeLike, getLikedMovies } from "../api";
 import { useNavigate } from "react-router-dom";
 
 export const Likes = () => {
-    const email: any = localStorage.getItem('email')
     const username: any = localStorage.getItem('username')
     const likedMovies: any = localStorage.getItem('likedMovies')
     const navigate = useNavigate()
@@ -16,7 +15,6 @@ export const Likes = () => {
         movieList = JSON.parse(likedMovies)
     }
 
-    const [friendsUsername, setFriendsUsername] = useState("");
 
     function removeLikedMovie( item : any) {
         const response = removeLike(username, item.item._id)
