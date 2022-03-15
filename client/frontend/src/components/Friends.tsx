@@ -2,6 +2,8 @@ import { useState } from "react"
 import { Form, Button } from "react-bootstrap";
 import { addFriend, getFriends, deleteFriend, getMatches } from "../api";
 import { useNavigate } from "react-router-dom";
+import './Friends.css'
+import { CgUserRemove} from "react-icons/cg";
 
 export const Friends = () => {
     const email: any = localStorage.getItem('email')
@@ -41,40 +43,40 @@ export const Friends = () => {
         })
     }
 
-    function deleteAFriend( item : any) {
+    function deleteAFriend(item: any) {
         const response = deleteFriend(email, item.item._id)
-        response.then(res=> {
-            if (res.status === "500"){
+        response.then(res => {
+            if (res.status === "500") {
                 alert("Something went wrong please try again")
-            }else{
-                alert("Removed "+ item.item.username + " from friends list")
+            } else {
+                alert("Removed " + item.item.username + " from friends list")
                 updateList()
             }
         })
-        
+
     }
-    function viewMatches(item:any){
-        if(username!= null){
+    function viewMatches(item: any) {
+        if (username != null) {
             const response = getMatches(username, item.item.username)
-            response.then(res=>{
-                if(res.message === 'No matches'){
+            response.then(res => {
+                if (res.message === 'No matches') {
                     alert("You and " + item.item.username + " have no matches. Start swiping!")
-                }else{
-                    alert("You have both liked the following movies: " +res.message)
+                } else {
+                    alert("You have both liked the following movies: " + res.message)
                 }
-                
+
             })
-        }  
+        }
     }
 
-    function updateList(){
+    function updateList() {
         const response = getFriends(email)
         response.then(res => {
             if (res.status === "500") {
                 alert("Wrong")
             } else {
                 localStorage.setItem('friends', res.message)
-                navigate('/friends')           
+                navigate('/friends')
             }
 
         })
@@ -82,38 +84,52 @@ export const Friends = () => {
     return (
 
         <div className="container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Friends (Click to remove)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {friendslist.map(item => {
-                        return (
-                            <tr >
-                                <td><Button onClick={() => viewMatches({item})}>{item.username}</Button><Button onClick={() => deleteAFriend({item})}>Remove Friend</Button></td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
+            <h3 className="text-center">
+                Friends (Click to view matches)
+            </h3>
+            <div className="d-flex justify-content-center">
+                <div className="col-lg-4 col-12">
+                <table className="tablewidth">
+                    <tbody>
+                        {friendslist.map(item => {
+                            return (
+                                <tr >
+                                    <td>
+                                        <Button className="btn-primary-friend my-1" onClick={() => viewMatches({ item })}>{item.username}</Button>
+                                        <Button className="btn-primary-remove" onClick={() => deleteAFriend({ item })}><CgUserRemove></CgUserRemove></Button>
+                                    </td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
+
+                </div>
+
+            </div>
+            <div className="d-flex justify-content-center">
+                <div className="col-lg-4 col-12 changepass mx-5">
+                    <Form onSubmit={handleSubmit}>
+                        <Form.Group controlId="username">
+                            <Form.Control
+                                autoFocus
+                                placeholder="Friends's username"
+                                type="text"
+                                value={friendsUsername}
+                                onChange={(e: any) => setFriendsUsername(e.target.value)}
+                            />
+                        </Form.Group>
+                        <Button type="submit" disabled={!validateForm()}>
+                            Add friend
+                        </Button>
+                    </Form>
+                </div>
+
+            </div>
 
 
-            <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="username">
-                    <Form.Label>Friend's username</Form.Label>
-                    <Form.Control
-                        autoFocus
-                        type="username"
-                        value={friendsUsername}
-                        onChange={(e: any) => setFriendsUsername(e.target.value)}
-                    />
-                </Form.Group>
-                <Button type="submit" disabled={!validateForm()}>
-                    Add friend
-                </Button>
-            </Form>
+
+
         </div>
     );
 }

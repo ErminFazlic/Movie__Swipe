@@ -1,7 +1,9 @@
 import { useState } from "react"
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Row } from "react-bootstrap";
 import { changePassword } from "../api";
 import { useNavigate } from "react-router-dom";
+import './Profile.css'
+import { FaAlignCenter } from "react-icons/fa";
 
 
 
@@ -35,7 +37,7 @@ export const Profile = () => {
         })
     }
 
-    function logout(){
+    function logout() {
         localStorage.clear()
         navigate('/')
     }
@@ -44,22 +46,27 @@ export const Profile = () => {
     return (
 
         <div className="container">
+            <div className="d-flex justify-content-center">
+                <div className="col-lg-4 col-12 changepass mx-5">
+                    <h3>Change password</h3>
+                    <Form onSubmit={handleSubmit}>
+                        <Form.Group controlId="password">
+                            <Form.Control
+                                placeholder="Password"
+                                autoFocus
+                                type="password"
+                                value={newPassword}
+                                onChange={(e: any) => setNewPassword(e.target.value)}
+                            />
+                        </Form.Group>
+                        <Button type="submit" disabled={!validateForm()}>
+                            Change!
+                        </Button>
+                        <Button onClick={logout}>Logout</Button>
+                    </Form>
+                </div>
+            </div>
 
-            <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="password">
-                    <Form.Label>Change password</Form.Label>
-                    <Form.Control
-                        autoFocus
-                        type="password"
-                        value={newPassword}
-                        onChange={(e: any) => setNewPassword(e.target.value)}
-                    />
-                </Form.Group>
-                <Button type="submit" disabled={!validateForm()}>
-                    Change!
-                </Button>
-            </Form>
-            <Button onClick={logout}>Logout</Button>
         </div>
     );
 }
