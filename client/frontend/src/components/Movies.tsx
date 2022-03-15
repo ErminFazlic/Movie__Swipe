@@ -1,12 +1,14 @@
 import { Button } from "react-bootstrap";
 import { likeMovie, dislikeMovie, getLikedMovies, getMovie } from "../api";
 import { useNavigate } from "react-router-dom";
+import './Movies.css'
+import { FaThumbsDown, FaThumbsUp } from 'react-icons/fa';
 
 export const Movies = () => {
     const JSONmovie: any = localStorage.getItem('JSONmovie')
     const username: any = localStorage.getItem('username')
     const navigate = useNavigate()
-    
+
     let movie: any = null
     if (JSONmovie != null) {
         movie = JSON.parse(JSONmovie)
@@ -74,9 +76,32 @@ export const Movies = () => {
 
 
 
-        <div>
+        <div className="">
             {movie != null &&
-                <><h2>{movie.name}</h2><img src={movie.imgUrl}></img><h3>{movie.release}</h3><h3>{movie.genre}</h3><Button onClick={handleLike}>Like</Button><Button onClick={handleDislike}>Dislike</Button></>
+                <>
+                    <div className="row">
+                        <div className="col-1 mx-auto my-auto">
+                        <Button className="btn-lg dislike" onClick={handleDislike}><FaThumbsDown /></Button>
+                        </div>
+
+                        <div className="col-4">
+                            <div className="movieBox">
+                                <h2>{movie.name}</h2><h3>{movie.release}</h3><h3>{movie.genre}</h3>
+                            </div>
+                            <div className="imgclass">
+                                <img className="rounded mx-auto d-block" src={movie.imgUrl}></img>
+                            </div>
+                        </div>
+                        <div className="col-1 mx-auto my-auto">
+                        <Button className="btn-lg like" onClick={handleLike}><FaThumbsUp /></Button>
+                        </div>
+                        <div className="d-flex justify-content-evenly">
+                            
+                        </div>
+                    </div>
+
+
+                </>
             }
             {movie === null &&
                 <h2>More movies coming soon!</h2>
