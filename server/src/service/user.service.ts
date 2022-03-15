@@ -1,8 +1,8 @@
 import { Response, Request } from "express"
-import {IUser} from './../types/user.interface'
+import {IUser} from '../types/user.interface'
 import User from './../model/user'
 
-const addUser = async (req:Request, res: Response):Promise<void> => {
+const addUser = async (req:Request, res: Response):Promise<any> => {
     try{
 
         const body = req.body as Pick<IUser, 'email' | 'password' | 'username'>

@@ -5,7 +5,7 @@ import User from "../model/user"
 import { IUser } from "../types/user.interface"
 import mongoose from "mongoose"
 
-const likeMovie = async (req: Request, res: Response): Promise<void> => {
+const likeMovie = async (req: Request, res: Response): Promise<any> => {
     try {
 
         const body = req.body as Pick<IMovie, 'name'>
@@ -49,7 +49,7 @@ const likeMovie = async (req: Request, res: Response): Promise<void> => {
     }
 }
 
-const dislikeMovie = async (req: Request, res: Response): Promise<void> => {
+const dislikeMovie = async (req: Request, res: Response): Promise<any> => {
     try {
 
         const body = req.body as Pick<IMovie, 'name'>
